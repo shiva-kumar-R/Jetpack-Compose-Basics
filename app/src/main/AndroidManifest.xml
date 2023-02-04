@@ -12,8 +12,8 @@
         android:theme="@style/Theme.JetpackComposeBasics"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
+            android:name=".ui.theme.MainActivity"
+            android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.JetpackComposeBasics">
             <intent-filter>
