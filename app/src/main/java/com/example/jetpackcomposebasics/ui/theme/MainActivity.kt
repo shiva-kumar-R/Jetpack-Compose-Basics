@@ -12,6 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,13 +63,24 @@ fun MyAppColumn(
 
 @Composable
 fun Greeting2(name: String) {
-    Row(modifier = Modifier.padding(20.dp)) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = "Hello ")
-            Text(text = "$name!")
-        }
-        ElevatedButton(onClick = { /*TODO*/ }) {
-            Text(text = "Show more")
+    //use mutableStateof in compose
+    //use remember so it doesn't reset on every recomposition
+    val expanded = remember { mutableStateOf(false) }
+    val extraPadding = if (expanded.value) 40.dp else 0.dp
+
+    Surface(color = MaterialTheme.colorScheme.primary) {
+        Row(modifier = Modifier.padding(20.dp)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+            ) {
+                Text(text = "Hello ")
+                Text(text = "$name!")
+            }
+            ElevatedButton(onClick = { expanded.value = !expanded.value }) {
+                Text(text = if (expanded.value) "Show less" else "Show more")
+            }
         }
     }
 }
