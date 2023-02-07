@@ -1,5 +1,6 @@
 package com.example.jetpackcomposebasics.ui.theme
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposebasics.ui.theme.ui.theme.JetpackComposeBasicsTheme
@@ -116,7 +118,10 @@ fun Greeting2(name: String) {
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello ")
-                Text(text = "$name!")
+                Text(
+                    text = "$name!", style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
+                )
             }
             ElevatedButton(onClick = { expanded = !expanded }) {
                 Text(text = if (expanded) "Show less" else "Show more")
@@ -138,7 +143,7 @@ fun OnboardingScreen(
     ) {
         Text(text = "Welcome to Jetpack Basics")
         Button(
-            modifier = Modifier.padding(20.dp),
+            modifier = Modifier.padding(2.dp),
             onClick = onContinueClicked
         ) {
             Text(text = "Continue")
@@ -146,6 +151,11 @@ fun OnboardingScreen(
     }
 }
 
+@Preview(
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "Dark Mode"
+)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
